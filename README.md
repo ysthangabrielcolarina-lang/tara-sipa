@@ -8,6 +8,7 @@ A browser game inspired by **sipa**, the traditional Filipino game in which you 
 
 ## How to play
 
+- **Pick your Iskolar** (boy or girl in the PUP uniform), then tap **Tara!**
 - **Tap or click the sipa** to kick it up. Each kick is **+1 point**.
 - Tap the **center** for a **Perfect** kick worth **+2 points**.
 - Tap the **left side** to send it to the right, and the **right side** to send it to the left.
@@ -19,6 +20,8 @@ A browser game inspired by **sipa**, the traditional Filipino game in which you 
 
 ## Features
 
+- Character select: two Iskolars in the PUP uniform
+- PUP main gate background with the 3-pillar pylon
 - Works on desktop and phones (touch controls, responsive layout)
 - Saves your high score in the browser (`localStorage`)
 - Sound effects made with the Web Audio API (no audio files needed)

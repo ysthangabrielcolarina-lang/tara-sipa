@@ -15,20 +15,61 @@
     <!-- Small buttons at the top-right corner -->
     <div class="hud-buttons">
       <button id="pauseBtn" class="icon-btn" aria-label="Pause">❚❚</button>
+      <button id="musicBtn" class="icon-btn" aria-label="Turn music off">🎵</button>
       <button id="muteBtn" class="icon-btn" aria-label="Mute sound">🔊</button>
     </div>
 
     <!-- Start screen -->
     <section id="menu" class="overlay">
       <h1>Tara, <span>Sipa!</span></h1>
-      <p class="tagline">Tap the sipa to kick it up. Don't let it touch the ground!</p>
+      <p class="tagline">Keep the sipa in the air. Don't let it touch the ground!</p>
       <ul class="howto">
-        <li>👆 Tap the <b>center</b> for a <b>Perfect</b> kick (+2)</li>
-        <li>👈 Tap the left side to send it right, and vice versa</li>
-        <li>🌬️ Watch out for the wind after 15 kicks</li>
+        <li>👆 <b>Tap anywhere</b> to kick when the sipa <b>glows</b></li>
+        <li>🎯 Tap <b>in line</b> with the sipa for a <b>Perfect</b> kick (+2)</li>
+        <li>↔️ Tap to its left or right to send it that way</li>
+        <li>⭐ Tap falling power-ups: ☕ 💰 1.0 📚 🍢</li>
+        <li>🎓 Rank up every 100 points: Freshman → Graduate</li>
       </ul>
       <p class="best">Best: <strong id="menuBest">0</strong></p>
       <button id="startBtn" class="big-btn">Play</button>
+      <div class="btn-row">
+        <button id="eventsBtn" class="small-btn">🎲 Mga Ganap!</button>
+        <button id="powerupsBtn" class="small-btn">⭐ Power-ups</button>
+      </div>
+    </section>
+
+    <!-- "Mga Ganap!" guide (all the random events) -->
+    <section id="events" class="overlay events-overlay hidden">
+      <h2>Mga Ganap!</h2>
+      <p class="tagline">These can happen while you play! From <b>Junior</b> rank, 2 can happen at once.</p>
+      <div id="eventList" class="event-list"></div>
+      <button id="eventsBackBtn" class="big-btn">Back</button>
+    </section>
+
+    <!-- Power-ups guide -->
+    <section id="powerups" class="overlay events-overlay hidden">
+      <h2>Power-ups</h2>
+      <p class="tagline">Tap them when they fall, or hit them with the sipa!</p>
+      <div id="powerupList" class="event-list"></div>
+      <button id="powerupsBackBtn" class="big-btn">Back</button>
+    </section>
+
+    <!-- Character select screen -->
+    <section id="select" class="overlay hidden">
+      <h2>Pili ka, Iskolar!</h2>
+      <p class="tagline">Choose your player</p>
+      <div class="char-cards">
+        <button class="char-card" data-char="boy" aria-pressed="false">
+          <canvas class="char-canvas" data-char="boy"></canvas>
+          <span class="char-name">Iskolar (Boy)</span>
+        </button>
+        <button class="char-card" data-char="girl" aria-pressed="false">
+          <canvas class="char-canvas" data-char="girl"></canvas>
+          <span class="char-name">Iskolar (Girl)</span>
+        </button>
+      </div>
+      <button id="goBtn" class="big-btn">Tara!</button>
+      <button id="backBtn" class="small-btn">Back</button>
     </section>
 
     <!-- Pause screen -->
@@ -43,9 +84,13 @@
       <h2>Game Over!</h2>
       <p class="final">Score: <strong id="finalScore">0</strong></p>
       <p class="best">Best: <strong id="finalBest">0</strong></p>
+      <p class="rank">Rank: <strong id="finalRank">Freshman</strong></p>
       <p id="newBest" class="new-best hidden">🎉 New best!</p>
       <button id="retryBtn" class="big-btn">Play Again</button>
-      <button id="shareBtn" class="small-btn">Share score</button>
+      <div class="btn-row">
+        <button id="changeCharBtn" class="small-btn">Change player</button>
+        <button id="shareBtn" class="small-btn">Share score</button>
+      </div>
       <p id="shareMsg" class="share-msg" aria-live="polite"></p>
     </section>
   </main>

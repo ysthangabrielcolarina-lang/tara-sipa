@@ -16,7 +16,7 @@ body {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  background: #1d3557;
+  background: radial-gradient(circle at 50% 0%, #2c4f80 0%, #172a4a 55%, #0f1d35 100%);
   font-family: "Trebuchet MS", "Segoe UI", Arial, sans-serif;
   color: #fff;
   touch-action: manipulation; /* stops double-tap zoom on phones */
@@ -30,9 +30,11 @@ body {
   aspect-ratio: 400 / 640;
   width: min(calc(100vw - 16px), calc((100vh - 48px) * 0.625));
   width: min(calc(100vw - 16px), calc((100dvh - 48px) * 0.625));
-  border-radius: 16px;
+  border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+  box-shadow:
+    0 0 0 3px rgba(255, 209, 102, 0.35), /* thin gold frame */
+    0 20px 60px rgba(0, 0, 0, 0.55);
 }
 
 canvas {
@@ -45,7 +47,8 @@ canvas {
 
 footer {
   font-size: 12px;
-  opacity: 0.75;
+  opacity: 0.8;
+  letter-spacing: 0.3px;
 }
 
 footer a {
@@ -57,6 +60,7 @@ footer a {
   position: absolute;
   top: 10px;
   right: 10px;
+  z-index: 10; /* stay clickable on top of the menu / game over screens */
   display: flex;
   gap: 6px;
 }
@@ -64,16 +68,19 @@ footer a {
 .icon-btn {
   width: 38px;
   height: 38px;
-  border: none;
-  border-radius: 10px;
-  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 12px;
+  background: rgba(10, 20, 40, 0.35);
+  backdrop-filter: blur(4px);
+  transition: transform 0.12s, background 0.12s;
   color: #fff;
   font-size: 16px;
   cursor: pointer;
 }
 
 .icon-btn:hover {
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(10, 20, 40, 0.55);
+  transform: translateY(-1px);
 }
 
 /* ===== Overlay screens (menu, pause, game over) ===== */
@@ -87,8 +94,20 @@ footer a {
   gap: 14px;
   padding: 24px;
   text-align: center;
-  background: rgba(29, 53, 87, 0.78);
-  backdrop-filter: blur(3px);
+  background: linear-gradient(180deg, rgba(110, 26, 40, 0.84) 0%, rgba(23, 42, 74, 0.9) 100%);
+  backdrop-filter: blur(4px);
+  animation: overlay-in 0.25s ease-out; /* screens fade and grow in gently */
+}
+
+@keyframes overlay-in {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 .hidden {
@@ -96,9 +115,10 @@ footer a {
 }
 
 h1 {
-  font-size: clamp(36px, 11vw, 54px);
+  font-size: clamp(38px, 12vw, 58px);
   line-height: 1;
-  text-shadow: 0 4px 0 #7b1e2b;
+  letter-spacing: 1px;
+  text-shadow: 0 4px 0 #4a0f19, 0 10px 22px rgba(0, 0, 0, 0.35);
 }
 
 h1 span {
@@ -108,7 +128,8 @@ h1 span {
 
 h2 {
   font-size: clamp(30px, 9vw, 42px);
-  text-shadow: 0 4px 0 #7b1e2b;
+  letter-spacing: 0.5px;
+  text-shadow: 0 4px 0 #4a0f19, 0 8px 18px rgba(0, 0, 0, 0.3);
 }
 
 .tagline {
@@ -120,14 +141,17 @@ h2 {
   list-style: none;
   font-size: 14px;
   line-height: 1.7;
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
   padding: 10px 14px;
-  border-radius: 12px;
+  border-radius: 14px;
   text-align: left;
 }
 
 .best,
-.final {
+.final,
+.rank {
   font-size: 20px;
 }
 
@@ -148,27 +172,154 @@ h2 {
   font-weight: bold;
   border: none;
   border-radius: 999px;
-  background: #ffd166;
+  background: linear-gradient(180deg, #ffe39a 0%, #ffc93c 100%);
   color: #7b1e2b;
-  box-shadow: 0 5px 0 #c99a2e;
+  box-shadow: 0 5px 0 #c99a2e, 0 10px 20px rgba(0, 0, 0, 0.25);
   cursor: pointer;
   font-family: inherit;
+  transition: transform 0.12s, filter 0.12s;
+}
+
+.big-btn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.05);
 }
 
 .big-btn:active {
   transform: translateY(4px);
-  box-shadow: 0 1px 0 #c99a2e;
+  box-shadow: 0 1px 0 #c99a2e, 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .small-btn {
   padding: 8px 20px;
   font-size: 15px;
-  border: 2px solid #fff;
+  border: 2px solid rgba(255, 255, 255, 0.85);
   border-radius: 999px;
-  background: transparent;
+  background: rgba(255, 255, 255, 0.08);
   color: #fff;
   cursor: pointer;
   font-family: inherit;
+  transition: background 0.12s, transform 0.12s;
+}
+
+.small-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-1px);
+}
+
+.btn-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* ===== Character select ===== */
+.char-cards {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  justify-content: center;
+}
+
+.char-card {
+  width: 44%;
+  max-width: 160px;
+  padding: 8px 6px 10px;
+  border: 3px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
+  color: #fff;
+  font-family: inherit;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  transition: transform 0.15s, background 0.15s, border-color 0.15s;
+}
+
+.char-card:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.char-card.selected {
+  border-color: #ffd166;
+  background: rgba(255, 209, 102, 0.22);
+  transform: translateY(-4px);
+  box-shadow: 0 0 0 3px rgba(255, 209, 102, 0.25), 0 12px 24px rgba(0, 0, 0, 0.3);
+}
+
+.char-canvas {
+  width: 100%;
+  aspect-ratio: 160 / 200;
+  height: auto;
+  cursor: pointer;
+}
+
+.char-name {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.char-card.selected .char-name {
+  color: #ffd166;
+}
+
+/* ===== Random events guide ===== */
+.events-overlay {
+  justify-content: flex-start;
+  padding: 18px 14px;
+  gap: 10px;
+}
+
+.events-overlay h2 {
+  font-size: clamp(26px, 8vw, 36px);
+}
+
+.event-list {
+  width: 100%;
+  flex: 1;
+  overflow-y: auto; /* scroll when the list is taller than the screen */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-right: 4px;
+}
+
+.event-card {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  text-align: left;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 14px;
+  padding: 8px;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.18);
+}
+
+.event-preview {
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+  width: 38%;
+  max-width: 130px;
+  flex-shrink: 0;
+  aspect-ratio: 120 / 90;
+  height: auto;
+  border-radius: 8px;
+  cursor: default;
+}
+
+.event-card h3 {
+  font-size: 15px;
+  margin-bottom: 3px;
+}
+
+.event-card p {
+  font-size: 12.5px;
+  line-height: 1.35;
+  opacity: 0.92;
 }
 
 .share-msg {
