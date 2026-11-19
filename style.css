@@ -1,0 +1,178 @@
+/* ===== Page layout ===== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #1d3557;
+  font-family: "Trebuchet MS", "Segoe UI", Arial, sans-serif;
+  color: #fff;
+  touch-action: manipulation; /* stops double-tap zoom on phones */
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* The game box keeps a 400 x 640 shape (5:8) and fits any screen */
+.game-wrap {
+  position: relative;
+  aspect-ratio: 400 / 640;
+  width: min(calc(100vw - 16px), calc((100vh - 48px) * 0.625));
+  width: min(calc(100vw - 16px), calc((100dvh - 48px) * 0.625));
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+}
+
+canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  touch-action: none; /* lets us handle taps ourselves */
+  cursor: pointer;
+}
+
+footer {
+  font-size: 12px;
+  opacity: 0.75;
+}
+
+footer a {
+  color: #ffd166;
+}
+
+/* ===== Corner buttons ===== */
+.hud-buttons {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  gap: 6px;
+}
+
+.icon-btn {
+  width: 38px;
+  height: 38px;
+  border: none;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.25);
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.icon-btn:hover {
+  background: rgba(0, 0, 0, 0.4);
+}
+
+/* ===== Overlay screens (menu, pause, game over) ===== */
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 24px;
+  text-align: center;
+  background: rgba(29, 53, 87, 0.78);
+  backdrop-filter: blur(3px);
+}
+
+.hidden {
+  display: none !important;
+}
+
+h1 {
+  font-size: clamp(36px, 11vw, 54px);
+  line-height: 1;
+  text-shadow: 0 4px 0 #7b1e2b;
+}
+
+h1 span {
+  display: block;
+  color: #ffd166;
+}
+
+h2 {
+  font-size: clamp(30px, 9vw, 42px);
+  text-shadow: 0 4px 0 #7b1e2b;
+}
+
+.tagline {
+  max-width: 280px;
+  font-size: 16px;
+}
+
+.howto {
+  list-style: none;
+  font-size: 14px;
+  line-height: 1.7;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 10px 14px;
+  border-radius: 12px;
+  text-align: left;
+}
+
+.best,
+.final {
+  font-size: 20px;
+}
+
+.final strong {
+  font-size: 34px;
+  color: #ffd166;
+}
+
+.new-best {
+  font-size: 18px;
+  color: #06d6a0;
+  font-weight: bold;
+}
+
+.big-btn {
+  padding: 14px 48px;
+  font-size: 22px;
+  font-weight: bold;
+  border: none;
+  border-radius: 999px;
+  background: #ffd166;
+  color: #7b1e2b;
+  box-shadow: 0 5px 0 #c99a2e;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.big-btn:active {
+  transform: translateY(4px);
+  box-shadow: 0 1px 0 #c99a2e;
+}
+
+.small-btn {
+  padding: 8px 20px;
+  font-size: 15px;
+  border: 2px solid #fff;
+  border-radius: 999px;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.share-msg {
+  min-height: 18px;
+  font-size: 13px;
+  opacity: 0.85;
+}

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tara, Sipa!</title>
+  <meta name="description" content="Tara, Sipa! is a browser game based on the Filipino traditional game sipa. Tap the sipa and keep it in the air!">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="game-wrap">
+    <!-- The game is drawn on this canvas -->
+    <canvas id="game" aria-label="Tara, Sipa! game area"></canvas>
+
+    <!-- Small buttons at the top-right corner -->
+    <div class="hud-buttons">
+      <button id="pauseBtn" class="icon-btn" aria-label="Pause">❚❚</button>
+      <button id="muteBtn" class="icon-btn" aria-label="Mute sound">🔊</button>
+    </div>
+
+    <!-- Start screen -->
+    <section id="menu" class="overlay">
+      <h1>Tara, <span>Sipa!</span></h1>
+      <p class="tagline">Tap the sipa to kick it up. Don't let it touch the ground!</p>
+      <ul class="howto">
+        <li>👆 Tap the <b>center</b> for a <b>Perfect</b> kick (+2)</li>
+        <li>👈 Tap the left side to send it right, and vice versa</li>
+        <li>🌬️ Watch out for the wind after 15 kicks</li>
+      </ul>
+      <p class="best">Best: <strong id="menuBest">0</strong></p>
+      <button id="startBtn" class="big-btn">Play</button>
+    </section>
+
+    <!-- Pause screen -->
+    <section id="paused" class="overlay hidden">
+      <h2>Paused</h2>
+      <button id="resumeBtn" class="big-btn">Resume</button>
+      <button id="quitBtn" class="small-btn">Main menu</button>
+    </section>
+
+    <!-- Game over screen -->
+    <section id="gameover" class="overlay hidden">
+      <h2>Game Over!</h2>
+      <p class="final">Score: <strong id="finalScore">0</strong></p>
+      <p class="best">Best: <strong id="finalBest">0</strong></p>
+      <p id="newBest" class="new-best hidden">🎉 New best!</p>
+      <button id="retryBtn" class="big-btn">Play Again</button>
+      <button id="shareBtn" class="small-btn">Share score</button>
+      <p id="shareMsg" class="share-msg" aria-live="polite"></p>
+    </section>
+  </main>
+
+  <footer>
+    Made by Ysthan Colarina ·
+    <a href="https://github.com/ysthangabrielcolarina-lang/tara-sipa" target="_blank" rel="noopener">Source code</a>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
