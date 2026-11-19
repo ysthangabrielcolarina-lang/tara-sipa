@@ -30,8 +30,8 @@ const groundLayer = document.createElement("canvas"); // trees, buildings, grass
 let backgroundDirty = true;
 
 // ----- 2. Game settings (tweak these to change the feel) -----
-const BASE_GRAVITY = 1100;  // how fast the sipa falls (pixels per second²)
-const MAX_GRAVITY = 2000;
+const BASE_GRAVITY = 1350;  // how fast the sipa falls (pixels per second²)
+const MAX_GRAVITY = 2400;
 const GRAVITY_PER_LEVEL = 70;
 const KICK_HEIGHT = 230;    // how high one kick sends the sipa (pixels)
 const SIDE_POWER = 260;     // how strongly an off-center tap pushes sideways
